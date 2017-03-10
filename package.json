@@ -11,6 +11,10 @@
     "lint:fix": "eslint --fix src/",
     "precommit": "npm run lint",
     "start": "hjs-dev-server",
+    "test": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --compilers js:babel-core/register --require test/setup.js --recursive test",
+    "test:watch": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --watch --compilers js:babel-core/register --require test/setup.js --recursive test",
+    "posttest": "nyc report --reporter=html",
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "watch": "webpack --progress --colors --watch"
   },
   "repository": {
@@ -25,21 +29,29 @@
   "homepage": "https://github.com/ivarni/ninno-client#readme",
   "devDependencies": {
     "babel-cli": "^6.23.0",
+    "babel-core": "^6.23.1",
     "babel-loader": "^6.3.2",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.23.0",
+    "coveralls": "^2.12.0",
+    "cross-env": "^3.2.3",
     "eslint": "^3.17.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.0",
+    "expect.js": "^0.3.1",
     "hjs-webpack": "^8.4.3",
     "husky": "^0.13.2",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
     "redux-devtools": "^3.3.2",
     "redux-devtools-dock-monitor": "^1.1.1",
     "redux-devtools-log-monitor": "^1.2.0"
   },
   "dependencies": {
+    "babel-polyfill": "^6.23.0",
     "material-ui": "^0.17.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
@@ -49,6 +61,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-logger": "^2.8.2",
+    "redux-saga": "^0.14.3",
     "redux-thunk": "^2.2.0"
   }
 }

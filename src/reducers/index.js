@@ -1,10 +1,12 @@
 import { routerReducer as routing } from 'react-router-redux';
 import { combineReducers } from 'redux';
 
-const entities = (state = {}) => state;
+import form from './form';
+import validator from './validator';
 
 const rootReducer = combineReducers({
-    entities,
+    form,
+    validator,
     routing,
 });
 
