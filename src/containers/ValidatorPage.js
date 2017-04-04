@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 
 import SsnValidator from '../components/SsnValidator';
 
-import { updateInputValue } from '../dispatchers';
+import { updateInputValue, validateSsn } from '../dispatchers';
 
-function Validator(props) {
+function ValidatorPage(props) {
     const {
         formState,
         validator,
@@ -16,13 +16,15 @@ function Validator(props) {
           formState={formState}
           result={validator.result}
           updateInputValue={props.updateInputValue}
+          validateSsn={props.validateSsn}
         />
     );
 }
 
-Validator.propTypes = {
+ValidatorPage.propTypes = {
     formState: PropTypes.shape({}).isRequired,
     updateInputValue: PropTypes.func.isRequired,
+    validateSsn: PropTypes.func.isRequired,
     validator: PropTypes.shape({}).isRequired,
 };
 
@@ -33,4 +35,5 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
     updateInputValue,
-})(Validator);
+    validateSsn,
+})(ValidatorPage);

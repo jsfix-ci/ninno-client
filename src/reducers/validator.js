@@ -4,7 +4,7 @@ import ssnValidator from '../utils/ssnValidator';
 const validate = (ssn) => {
     if (!ssnValidator(ssn)) {
         return {
-            valid: false,
+            invalid: true,
         };
     }
 
@@ -38,19 +38,23 @@ const validate = (ssn) => {
         alternateYears,
         day,
         month,
-        valid: true,
+        invalid: false,
         year: Number(`${century}${year}`),
     };
 };
 
-const defaultState = { result: validate('09058049805') };
+const defaultState = {
+    result: {
+        invalid: true,
+    },
+};
 
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.VALIDATE_SSN:
             return {
                 ...state,
-                ...validate(action.ssn),
+                result: validate(action.ssn),
             };
         default:
             return state;

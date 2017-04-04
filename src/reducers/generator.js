@@ -13,9 +13,12 @@ import * as actions from '../actions';
 const range = (a, b) =>
     Array.from(Array(b - a), (_, i) => i + a);
 
-const defaultState = [];
+const defaultState = {
+    copiedSsns: [],
+    ssns: [],
+};
 
-const generateSsns = (date) => {
+const generateSsns = (copiedSsns = [], date) => {
     const day = String(getDate(date)).padStart(2, '0');
     const month = String(getMonth(date)).padStart(2, '0');
     const year = getYear(date);
@@ -56,7 +59,13 @@ const generateSsns = (date) => {
         if (k2 === 10) {
             continue;
         }
-        ssns.push(bareSsn + k1 + k2);
+
+        const ssn = bareSsn + k1 + k2;
+
+        ssns.push({
+            copied: copiedSsns.includes(ssn),
+            ssn,
+        });
     }
     /* eslint-enable no-continue */
 
@@ -65,10 +74,19 @@ const generateSsns = (date) => {
 
 export default (state = defaultState, action) => {
     switch (action.type) {
+        case actions.COPY_SSN:
+            return {
+                ...state,
+                ssns: state.ssns.map(ssn => ({
+                    copied: state.copiedSsns.includes(ssn.ssn),
+                    ssn: ssn.ssn,
+                })),
+                copiedSsns: [...state.copiedSsns, action.ssn],
+            };
         case actions.GENERATE_SSNS:
             return {
                 ...state,
-                ssns: generateSsns(action.date),
+                ssns: generateSsns(state.copiedSsns, action.date),
             };
         default:
             return state;

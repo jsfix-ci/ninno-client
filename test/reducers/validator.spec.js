@@ -1,39 +1,39 @@
 import reducer from '../../src/reducers/validator';
 import * as actions from '../../src/actions';
 
-const action = value => actions.ssnValidate(value);
-const getState = ssn => reducer(undefined, action(ssn));
+const action = value => actions.validateSsn(value);
+const getState = ssn => reducer(undefined, action(ssn)).result;
 
 describe('validator reducer', () => {
     describe('valid checksum', () => {
         it('returns invalid if the length is wrong', () => {
             const state = getState('0905804980');
 
-            expect(state.valid).to.be(false);
+            expect(state.invalid).to.be(true);
         });
 
         it('returns invalid if the checksum is wrong', () => {
-            expect(getState('0905804981').valid).to.be(false);
-            expect(getState('0905804990').valid).to.be(false);
+            expect(getState('0905804981').invalid).to.be(true);
+            expect(getState('0905804990').invalid).to.be(true);
         });
 
         it('validates checksum for regular ssn', () => {
             const state = getState('09058049805');
 
-            expect(state.valid).to.be(true);
+            expect(state.invalid).to.be(false);
         });
 
         it('handles garbage input', () => {
             const state = getState('abcdefghijk');
 
-            expect(state.valid).to.be(false);
+            expect(state.invalid).to.be(true);
         });
 
         describe('when birth date falls outside 1854-2039', () => {
             it('indicates that ssn might not be valid for person born 1940-1999', () => {
                 const state = getState('12114898803');
 
-                expect(state.valid).to.be(true);
+                expect(state.invalid).to.be(false);
                 expect(state.year).to.be(1948);
                 expect(state.alternateYears).to.contain(2048);
             });
@@ -41,7 +41,7 @@ describe('validator reducer', () => {
             it('indicates that ssn might not be valid for person born 1854-1899', () => {
                 const state = getState('07066073321');
 
-                expect(state.valid).to.be(true);
+                expect(state.invalid).to.be(false);
                 expect(state.year).to.be(1860);
                 expect(state.alternateYears).to.contain(2060);
             });
@@ -51,7 +51,6 @@ describe('validator reducer', () => {
     describe('date of birth', () => {
         it('finds date of birth for 1900-1999', () => {
             const state = getState('09058049805');
-
             expect(state.day).to.be(9);
             expect(state.month).to.be(5);
             expect(state.year).to.be(1980);

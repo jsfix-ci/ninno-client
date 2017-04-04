@@ -7,12 +7,8 @@ import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
 import AppMenu from '../components/AppMenu';
-import { validatorPath } from '../routes';
-
-injectTapEventPlugin();
+import { generatorPath, validatorPath } from '../routes';
 
 class App extends Component {
 
@@ -20,6 +16,7 @@ class App extends Component {
         super();
 
         this.openDrawer = this.openDrawer.bind(this);
+        this.openGenerator = this.openGenerator.bind(this);
         this.openValidator = this.openValidator.bind(this);
 
         this.state = {
@@ -36,6 +33,11 @@ class App extends Component {
     openValidator() {
         this.openDrawer(false);
         this.props.router.push(validatorPath);
+    }
+
+    openGenerator() {
+        this.openDrawer(false);
+        this.props.router.push(generatorPath);
     }
 
     render() {
@@ -58,6 +60,9 @@ class App extends Component {
                         <MenuItem onTouchTap={this.openValidator}>
                             Validering av fødselsnummer
                         </MenuItem>
+                        <MenuItem onTouchTap={this.openGenerator}>
+                            Generering av fødselsnummer
+                        </MenuItem>
                     </Drawer>
                     {children}
                 </div>
@@ -67,10 +72,14 @@ class App extends Component {
 }
 
 App.propTypes = {
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     router: PropTypes.shape({
         push: PropTypes.func.isRequired,
     }).isRequired,
+};
+
+App.defaultProps = {
+    children: <div />,
 };
 
 const mapStateToProps = state => ({

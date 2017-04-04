@@ -17,8 +17,21 @@ class SsnValidator extends Component {
         this.onInputChange = this.onInputChange.bind(this);
     }
 
+    componentDidMount() {
+        const {
+            formState: {
+                'validate-ssn': ssnValue,
+            },
+        } = this.props;
+
+        if (ssnValue) {
+            this.props.validateSsn(ssnValue);
+        }
+    }
+
     onInputChange(e) {
         this.props.updateInputValue(e.target.name, e.target.value);
+        this.props.validateSsn(e.target.value);
     }
 
     render() {
@@ -64,6 +77,7 @@ SsnValidator.propTypes = {
         year: PropTypes.number,
         invalid: PropTypes.bool.isRequired,
     }).isRequired,
+    validateSsn: PropTypes.func.isRequired,
 };
 
 export default SsnValidator;
