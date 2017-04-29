@@ -74,15 +74,17 @@ const generateSsns = (copiedSsns = [], date) => {
 
 export default (state = defaultState, action) => {
     switch (action.type) {
-        case actions.COPY_SSN:
+        case actions.COPY_SSN: {
+            const copiedSsns = [...state.copiedSsns, action.ssn];
             return {
                 ...state,
                 ssns: state.ssns.map(ssn => ({
-                    copied: state.copiedSsns.includes(ssn.ssn),
+                    copied: copiedSsns.includes(ssn.ssn),
                     ssn: ssn.ssn,
                 })),
-                copiedSsns: [...state.copiedSsns, action.ssn],
+                copiedSsns,
             };
+        }
         case actions.GENERATE_SSNS:
             return {
                 ...state,
