@@ -8,7 +8,7 @@ export const getChecksumDigit = (ssn, factors) => {
     return (sum === 11 ? 0 : sum);
 };
 
-export default (ssn) => {
+export const ssnValidator = (ssn) => {
     if (ssn.length !== 11) {
         return false;
     }

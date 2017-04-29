@@ -1,7 +1,7 @@
 import reducer from '../../src/reducers/generator';
 import * as actions from '../../src/actions';
 
-import ssnValidator from '../../src/utils/ssnValidator';
+import { ssnValidator } from '../../src/utils';
 
 const generateAction = date => actions.generateSsns(date);
 const copyAction = ssn => actions.copySsn(ssn);

@@ -1,5 +1,5 @@
 import * as actions from '../actions';
-import ssnValidator from '../utils/ssnValidator';
+import { ssnValidator } from '../utils';
 
 const validate = (ssn) => {
     if (!ssnValidator(ssn)) {
@@ -34,9 +34,13 @@ const validate = (ssn) => {
     // TODO: this screams for a good refactoring
     const alternateYears = alternativeCenturies.map(a => Number(String(a) + year));
 
+    const genderMarker = Number(ssn.substring(8, 9));
+    const gender = genderMarker % 2 === 0 ? 'F' : 'M';
+
     return {
         alternateYears,
         day,
+        gender,
         month,
         invalid: false,
         year: Number(`${century}${year}`),

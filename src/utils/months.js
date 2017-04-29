@@ -13,4 +13,4 @@ const MONTHS = {
     12: 'Desember',
 };
 
-export default month => MONTHS[month];
+export const month = m => MONTHS[m];

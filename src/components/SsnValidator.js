@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import TextField from 'material-ui/TextField';
 import Paper from 'material-ui/Paper';
 
-import months from '../utils/months';
+import { gender, month } from '../utils';
 
 const paperStyle = {
     height: '100%',
@@ -56,7 +56,11 @@ class SsnValidator extends Component {
                         <div>
                             <h2>Født</h2>
                             <p>
-                                {result.day}. {months(result.month)} {result.year}
+                                {result.day}. {month(result.month)} {result.year}
+                            </p>
+                            <h2>Kjønn</h2>
+                            <p>
+                                {gender(result.gender)}
                             </p>
                         </div>
                     }

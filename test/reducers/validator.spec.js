@@ -88,4 +88,12 @@ describe('validator reducer', () => {
             expect(state.year).to.be(1855);
         });
     });
+
+    describe('gender', () => {
+        it('correctly identifies male', () => {
+            const state = getState('29041799143');
+
+            expect(state.gender).to.be('M');
+        });
+    });
 });
