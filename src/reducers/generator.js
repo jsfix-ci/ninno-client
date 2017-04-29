@@ -20,7 +20,7 @@ const defaultState = {
 
 const generateSsns = (copiedSsns = [], date) => {
     const day = String(getDate(date)).padStart(2, '0');
-    const month = String(getMonth(date)).padStart(2, '0');
+    const month = String(getMonth(date) + 1).padStart(2, '0');
     const year = getYear(date);
 
     const datePart = day + month + String(year).substring(2, 4);
