@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import IconButton from 'material-ui/IconButton';
 import ContentCopyIcon from 'material-ui/svg-icons/content/content-copy';
 
+import CopyToClipboard from 'react-copy-to-clipboard';
+
 const getStyle = copied => ({
     color: copied ? 'red' : 'black',
     flexBasis: '30%',
@@ -32,13 +34,15 @@ export default class SsnItem extends Component {
         return (
             <li style={getStyle(ssn.copied)}>
                 {ssn.ssn}
-                <IconButton
-                  onTouchTap={this.onClick}
-                  tooltip="kopier"
-                  tooltipPosition="top-left"
-                >
-                    <ContentCopyIcon />
-                </IconButton>
+                <CopyToClipboard text={ssn.ssn}>
+                    <IconButton
+                      onTouchTap={this.onClick}
+                      tooltip="kopier"
+                      tooltipPosition="top-left"
+                    >
+                        <ContentCopyIcon />
+                    </IconButton>
+                </CopyToClipboard>
             </li>
         );
     }
