@@ -5,8 +5,9 @@ import getYear from 'date-fns/get_year';
 import {
     K1_FACTORS,
     K2_FACTORS,
+    GENDERS,
     getChecksumDigit,
-} from '../utils/ssnValidator';
+} from '../utils';
 
 import * as actions from '../actions';
 
@@ -62,8 +63,12 @@ const generateSsns = (copiedSsns = [], date) => {
 
         const ssn = bareSsn + k1 + k2;
 
+        const genderMarker = Number(ssn.substring(8, 9));
+        const gender = genderMarker % 2 === 0 ? GENDERS.F : GENDERS.M;
+
         ssns.push({
             copied: copiedSsns.includes(ssn),
+            gender,
             ssn,
         });
     }
@@ -79,6 +84,7 @@ export default (state = defaultState, action) => {
             return {
                 ...state,
                 ssns: state.ssns.map(ssn => ({
+                    ...ssn,
                     copied: copiedSsns.includes(ssn.ssn),
                     ssn: ssn.ssn,
                 })),

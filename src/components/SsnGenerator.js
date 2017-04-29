@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import DatePicker from 'material-ui/DatePicker';
 import Paper from 'material-ui/Paper';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
 
 import areIntlLocalesSupported from 'intl-locales-supported';
 
+import { GENDERS } from '../utils';
 import SsnItem from './SsnItem';
 
 /* eslint-disable global-require */
@@ -22,18 +24,13 @@ const paperStyle = {
     padding: 20,
 };
 
-const listStyle = {
-    display: 'flex',
-    flexWrap: 'wrap',
-    padding: 0,
-};
-
 class SsnGenerator extends Component {
 
     constructor() {
         super();
 
         this.onInputChange = this.onInputChange.bind(this);
+        this.makeTableBody = this.makeTableBody.bind(this);
     }
 
     componentDidMount() {
@@ -53,6 +50,34 @@ class SsnGenerator extends Component {
         this.props.generateSsns(date);
     }
 
+    makeTableBody(femaleSsns, maleSsns) {
+        const diff = femaleSsns.length - maleSsns.length;
+        if (diff) {
+            // TODO: Handle
+            return null;
+        }
+        return (
+            <TableBody displayRowCheckbox={false}>
+                {femaleSsns.map((_, index) => (
+                    <TableRow key={_.ssn}>
+                        <TableRowColumn>
+                            <SsnItem
+                              copySsn={this.props.copySsn}
+                              ssn={femaleSsns[index]}
+                            />
+                        </TableRowColumn>
+                        <TableRowColumn>
+                            <SsnItem
+                              copySsn={this.props.copySsn}
+                              ssn={maleSsns[index]}
+                            />
+                        </TableRowColumn>
+                    </TableRow>
+                ))}
+            </TableBody>
+        );
+    }
+
     render() {
         const {
             copySsn,
@@ -61,6 +86,9 @@ class SsnGenerator extends Component {
             },
             result,
         } = this.props;
+
+        const maleSsns = result.filter(ssn => ssn.gender === GENDERS.M);
+        const femaleSsns = result.filter(ssn => ssn.gender === GENDERS.F);
 
         return (
             <Paper style={paperStyle}>
@@ -74,15 +102,22 @@ class SsnGenerator extends Component {
                       onChange={this.onInputChange}
                       value={ssnValue}
                     />
-                    <ul style={listStyle}>
-                        {result.map(ssn =>
-                            <SsnItem
-                              copySsn={copySsn}
-                              key={ssn.ssn}
-                              ssn={ssn}
-                            />,
-                        )}
-                    </ul>
+                    <Table>
+                        <TableHeader
+                          adjustForCheckbox={false}
+                          displaySelectAll={false}
+                        >
+                            <TableRow>
+                                <TableHeaderColumn>
+                                    Kvinne
+                                </TableHeaderColumn>
+                                <TableHeaderColumn>
+                                    Mann
+                                </TableHeaderColumn>
+                            </TableRow>
+                        </TableHeader>
+                        {this.makeTableBody(femaleSsns, maleSsns, copySsn)}
+                    </Table>
                 </form>
             </Paper>
         );

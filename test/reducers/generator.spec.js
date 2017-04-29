@@ -1,7 +1,7 @@
 import reducer from '../../src/reducers/generator';
 import * as actions from '../../src/actions';
 
-import { ssnValidator } from '../../src/utils';
+import { ssnValidator, GENDERS } from '../../src/utils';
 
 const generateAction = date => actions.generateSsns(date);
 const copyAction = ssn => actions.copySsn(ssn);
@@ -82,6 +82,20 @@ describe('generator reducer', () => {
         );
 
         expect(stateSsn.copied).to.be(true);
+    });
+
+    it('indicates gender', () => {
+        const state = getState(generateAction(new Date(1990, 11, 1)));
+
+        const totalLength = state.ssns.length;
+        const maleLength = state.ssns.filter(ssn => ssn.gender === GENDERS.M).length;
+        const femaleLength = state.ssns.filter(ssn => ssn.gender === GENDERS.F).length;
+
+        expect(maleLength).to.be.above(0);
+        expect(maleLength).to.be.below(totalLength);
+
+        expect(femaleLength).to.be.above(0);
+        expect(femaleLength).to.be.below(totalLength);
     });
 
     describe('century range collisions', () => {
