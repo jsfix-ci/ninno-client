@@ -1,6 +1,6 @@
 {
   "name": "ninno-client",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "files": [
     "public/"
@@ -13,6 +13,7 @@
     "start": "hjs-dev-server",
     "test": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --compilers js:babel-core/register --require test/setup.js --recursive test",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --watch --compilers js:babel-core/register --require test/setup.js --recursive test",
+    "prepublish": "npm run build",
     "posttest": "nyc report --reporter=html",
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "watch": "webpack --progress --colors --watch"
