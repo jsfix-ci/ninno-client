@@ -31,6 +31,10 @@ export default class SsnItem extends Component {
             ssn,
         } = this.props;
 
+        if (!ssn.ssn) {
+            return null;
+        }
+
         return (
             <li style={getStyle(ssn.copied)}>
                 {ssn.ssn}
@@ -51,7 +55,7 @@ export default class SsnItem extends Component {
 SsnItem.propTypes = {
     copySsn: PropTypes.func.isRequired,
     ssn: PropTypes.shape({
-        copied: PropTypes.bool.isRequired,
-        ssn: PropTypes.string.isRequired,
+        copied: PropTypes.bool,
+        ssn: PropTypes.string,
     }).isRequired,
 };

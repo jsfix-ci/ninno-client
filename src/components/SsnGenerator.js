@@ -53,13 +53,19 @@ class SsnGenerator extends Component {
     makeTableBody(femaleSsns, maleSsns) {
         const diff = femaleSsns.length - maleSsns.length;
         if (diff) {
-            // TODO: Handle
-            return null;
+            for (let i = 0, l = Math.abs(diff); i < l; i += 1) {
+                if (diff > 0) {
+                    maleSsns.push({});
+                } else {
+                    femaleSsns.push({});
+                }
+            }
         }
+
         return (
             <TableBody displayRowCheckbox={false}>
                 {femaleSsns.map((_, index) => (
-                    <TableRow key={_.ssn}>
+                    <TableRow key={_.ssn || index}>
                         <TableRowColumn>
                             <SsnItem
                               copySsn={this.props.copySsn}
