@@ -1,4 +1,10 @@
 {
     "presets": ["latest", "react"],
-    "plugins": ["transform-object-rest-spread"]
+    "plugins": [
+        "transform-object-rest-spread",
+        ["babel-root-import", [{
+          "rootPathPrefix": "~",
+          "rootPathSuffix": "src"
+        }]]
+    ]
 }

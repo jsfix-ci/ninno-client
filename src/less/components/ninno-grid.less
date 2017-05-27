@@ -1,0 +1,165 @@
+// Variables
+@grid-columns: 12;
+@grid-width: 1280px;
+@grid-gutter-sm: 20px;
+@grid-gutter-lg: 40px;
+
+// Mixins
+.create-column(@size, @total, @current: 0) when (@current <= @total) {
+    .ninno-grid__col--@{size}-@{current} {
+        flex-basis: (@current * 100%) / @total;
+        max-width: (@current * 100%) / @total;
+        display: flex;
+        & when (@current = 0) {
+            display: none;
+        }
+    }
+
+    .ninno-grid__col--@{size}-offset-@{current} {
+        margin-left: (@current * 100%) / @total;
+    }
+
+    .create-column(@size, @total, @current + 1);
+}
+
+.ninno-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.ninno-grid__row {
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: @grid-width;
+    width: 100%;
+
+    @media only screen and (min-width: @breakpoint-lg) {
+        margin-left: @grid-gutter-lg / 2 * -1;
+        margin-right: @grid-gutter-lg / 2 * -1;
+    }
+
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+}
+
+.ninno-grid__row-wrapper {
+    &:extend(.ninno-grid__row);
+
+    margin: 0 auto;
+}
+
+.ninno-grid__col {
+    display: flex;
+
+    &--reverse {
+        flex-direction: row-reverse;
+    }
+
+    &--vertical {
+        flex-direction: column;
+    }
+
+    &--vertical&--reverse {
+        flex-direction: column-reverse;
+    }
+
+    &--start {
+        justify-content: flex-start;
+        text-align: start;
+    }
+
+    &--center {
+        justify-content: center;
+        text-align: center;
+    }
+
+    &--end {
+        justify-content: flex-end;
+        text-align: end;
+    }
+
+    &--top {
+        align-items: flex-start;
+    }
+
+    &--middle {
+        align-items: center;
+    }
+
+    &--bottom {
+        align-items: flex-end;
+    }
+
+    &--around {
+        justify-content: space-around;
+    }
+
+    &--between {
+        justify-content: space-between;
+    }
+
+    &--lg,
+    &--md,
+    &--sm,
+    &--xl {
+        flex-grow: 1;
+        flex-basis: 0;
+        max-width: 100%;
+
+        &,
+        &-offset {
+            &-1,
+            &-10,
+            &-11,
+            &-12,
+            &-2,
+            &-3,
+            &-4,
+            &-5,
+            &-6,
+            &-7,
+            &-8,
+            &-9 {
+                flex: 1 1 auto;
+                padding: 0 (@grid-gutter-sm / 2) @grid-gutter-sm;
+
+                /* stylelint-disable max-nesting-depth */
+                @media only screen and (min-width: @breakpoint-lg) {
+                    padding: 0 (@grid-gutter-lg / 2) @grid-gutter-lg;
+                }
+                /* stylelint-enable max-nesting-depth */
+            }
+        }
+    }
+}
+
+.create-column(sm, 12);
+
+@media only screen and (min-width: @breakpoint-md) {
+    .create-column(md, 12);
+
+    .ninno-grid__col--md-offset-0 {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (min-width: @breakpoint-lg) {
+    .create-column(lg, 12);
+
+    .ninno-grid__col--lg-offset-0 {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (min-width: @breakpoint-xl) {
+    .create-column(xl, 12);
+
+    .ninno-grid__col--xl-offset-0 {
+        margin-left: 0;
+    }
+}

@@ -4,7 +4,8 @@ import React from 'react';
 import { render } from 'react-dom';
 import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
+
+import './less/styles.less';
 
 import Root from './containers/Root';
 import configureStore from './store/configureStore';
@@ -12,9 +13,17 @@ import configureStore from './store/configureStore';
 const store = configureStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
-injectTapEventPlugin();
-
-render(
-    <Root store={store} history={history} />,
+const renderApp = Component => render(
+    <Component store={store} history={history} />,
     window.document.getElementById('root'),
 );
+
+renderApp(Root);
+
+if (module.hot) {
+    module.hot.accept('./containers/Root', () => {
+        /* eslint-disable global-require */
+        renderApp(require('./containers/Root').default);
+        /* eslint-enable global-require */
+    });
+}

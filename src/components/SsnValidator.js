@@ -1,13 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
+
+import { Grid, GridRow, GridCol } from '~/components/grid';
 
 import { gender, month } from '../utils';
-
-const paperStyle = {
-    height: '100%',
-    padding: 20,
-};
 
 class SsnValidator extends Component {
 
@@ -43,29 +38,40 @@ class SsnValidator extends Component {
         } = this.props;
 
         return (
-            <Paper style={paperStyle}>
-                <form>
-                    <h1>Validering av fødselsnummer</h1>
-                    <TextField
-                      hintText="Fyll inn fødselsnummer"
-                      name="validate-ssn"
-                      onChange={this.onInputChange}
-                      value={ssnValue}
-                    />
-                    {!result.invalid &&
-                        <div>
-                            <h2>Født</h2>
-                            <p>
-                                {result.day}. {month(result.month)} {result.year}
-                            </p>
-                            <h2>Kjønn</h2>
-                            <p>
-                                {gender(result.gender)}
-                            </p>
-                        </div>
-                    }
-                </form>
-            </Paper>
+            <Grid>
+                <GridRow>
+                    <GridCol sm={12} center>
+                        <h1>Validering av fødselsnummer</h1>
+                    </GridCol>
+                </GridRow>
+                <GridRow>
+                    <GridCol sm={{ cols: 8, offset: 4 }}>
+                        <form>
+                            <input
+                              name="validate-ssn"
+                              onChange={this.onInputChange}
+                              value={ssnValue}
+                            />
+                        </form>
+                    </GridCol>
+                </GridRow>
+                <GridRow>
+                    <GridCol sm={{ cols: 8, offset: 4 }}>
+                        {!result.invalid &&
+                            <div>
+                                <h2>Født</h2>
+                                <p>
+                                    {result.day}. {month(result.month)} {result.year}
+                                </p>
+                                <h2>Kjønn</h2>
+                                <p>
+                                    {gender(result.gender)}
+                                </p>
+                            </div>
+                        }
+                    </GridCol>
+                </GridRow>
+            </Grid>
         );
     }
 }

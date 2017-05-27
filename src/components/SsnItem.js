@@ -1,18 +1,7 @@
 import React, { Component, PropTypes } from 'react';
-
-import IconButton from 'material-ui/IconButton';
-import ContentCopyIcon from 'material-ui/svg-icons/content/content-copy';
+import classNames from 'classnames';
 
 import CopyToClipboard from 'react-copy-to-clipboard';
-
-const getStyle = copied => ({
-    color: copied ? 'red' : 'black',
-    flexBasis: '30%',
-    flexGrow: 1,
-    listStyleType: 'none',
-    minWidth: 150,
-    padding: '5px 0',
-});
 
 export default class SsnItem extends Component {
 
@@ -36,16 +25,23 @@ export default class SsnItem extends Component {
         }
 
         return (
-            <li style={getStyle(ssn.copied)}>
+            <li
+              className={
+                    classNames(
+                        'ninno-fnr-list__item',
+                        { 'ninno-fnr-list__item--copied': ssn.copied },
+                    )
+                }
+            >
                 {ssn.ssn}
                 <CopyToClipboard text={ssn.ssn}>
-                    <IconButton
-                      onTouchTap={this.onClick}
-                      tooltip="kopier"
-                      tooltipPosition="top-left"
+                    <button
+                      className="ninno-fnr-list__copy-button"
+                      type="button"
+                      onClick={this.onClick}
                     >
-                        <ContentCopyIcon />
-                    </IconButton>
+                        kopier
+                    </button>
                 </CopyToClipboard>
             </li>
         );

@@ -4,10 +4,13 @@
         "browser": true
     },
     "rules": {
+        "import/extensions": [0],
         "import/no-extraneous-dependencies": [0],
+        "import/no-unresolved": [0],
         "import/prefer-default-export": [0],
         "indent": [2, 4, { "SwitchCase": 1 }],
         "react/jsx-indent": [2, 4],
         "react/jsx-filename-extension": [2, { "extensions": [".js"] }],
+        "react/require-default-props": [0]
     }
 }
