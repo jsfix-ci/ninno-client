@@ -80,12 +80,16 @@ class SsnGenerator extends Component {
                 <GridRow>
                     <GridCol sm={6}>
                         <ul className="ninno-fnr-list">
-                            {maleSsns.map(ssn => <SsnItem ssn={ssn} copySsn={copySsn} />)}
+                            {maleSsns.map(ssn =>
+                                <SsnItem key={ssn.ssn} ssn={ssn} copySsn={copySsn} />,
+                            )}
                         </ul>
                     </GridCol>
                     <GridCol sm={6}>
                         <ul className="ninno-fnr-list">
-                            {femaleSsns.map(ssn => <SsnItem ssn={ssn} copySsn={copySsn} />)}
+                            {femaleSsns.map(ssn =>
+                                <SsnItem key={ssn.ssn} ssn={ssn} copySsn={copySsn} />,
+                            )}
                         </ul>
                     </GridCol>
                 </GridRow>
