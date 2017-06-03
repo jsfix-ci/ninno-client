@@ -3,3 +3,4 @@ public/
 .nyc_output/
 coverage/
 npm-debug*
+*sublime-workspace
