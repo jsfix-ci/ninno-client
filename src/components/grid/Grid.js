@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const Grid = ({ children, className }) =>
     <div
-      className={
+        className={
             classNames(
                 className,
                 'ninno-grid',

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 const GridRow = ({ className, children }) =>
     <div
-      className={
+        className={
             classNames(
                 className,
                 'ninno-grid__row',

@@ -1,7 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { arrayOf, bool, func, instanceOf, shape, string } from 'prop-types';
 
-import parse from 'date-fns/parse';
+import isEqual from 'date-fns/is_equal';
+import isValid from 'date-fns/is_valid';
 
+import { DatePicker } from '~/components/date-picker';
 import { Grid, GridRow, GridCol } from '~/components/grid';
 
 import { GENDERS } from '../utils';
@@ -9,42 +12,19 @@ import SsnItem from './SsnItem';
 
 class SsnGenerator extends Component {
 
-    constructor() {
-        super();
-
-        this.onInputChange = this.onInputChange.bind(this);
-    }
-
     componentDidMount() {
-        const {
-            formState: {
-                'generate-ssn': ssnValue,
-            },
-        } = this.props;
-
-        if (ssnValue) {
-            this.props.generateSsns(ssnValue);
-        }
+        this.props.generateSsns(this.props.date);
     }
 
-    onInputChange(e) {
-        const {
-            target: {
-                value,
-            },
-        } = e;
-        this.props.updateInputValue('generate-ssn', value);
-        if (value.length === 10) {
-            this.props.generateSsns(parse(value));
+    componentWillReceiveProps(nextProps) {
+        if (!isEqual(nextProps.date, this.props.date) && isValid(nextProps.date)) {
+            this.props.generateSsns(nextProps.date);
         }
     }
 
     render() {
         const {
             copySsn,
-            formState: {
-                'generate-ssn': ssnValue,
-            },
             result,
         } = this.props;
 
@@ -54,26 +34,20 @@ class SsnGenerator extends Component {
         return (
             <Grid>
                 <GridRow>
-                    <GridCol sm={12} center>
+                    <GridCol sm={12} center={true}>
                         <h1>Generering av fødselsnummer</h1>
                     </GridCol>
                 </GridRow>
                 <GridRow>
                     <GridCol sm={{ cols: 8, offset: 4 }}>
-                        <form>
-                            <input
-                              onChange={this.onInputChange}
-                              placeholder="YYYY-MM-DD"
-                              value={ssnValue}
-                            />
-                        </form>
+                        <DatePicker />
                     </GridCol>
                 </GridRow>
                 <GridRow>
-                    <GridCol sm={6} center>
+                    <GridCol sm={6} center={true}>
                         <h2>Menn</h2>
                     </GridCol>
-                    <GridCol sm={6} center>
+                    <GridCol sm={6} center={true}>
                         <h2>Kvinner</h2>
                     </GridCol>
                 </GridRow>
@@ -99,14 +73,13 @@ class SsnGenerator extends Component {
 }
 
 SsnGenerator.propTypes = {
-    copySsn: PropTypes.func.isRequired,
-    formState: PropTypes.shape({}).isRequired,
-    generateSsns: PropTypes.func.isRequired,
-    result: PropTypes.arrayOf(PropTypes.shape({
-        copied: PropTypes.bool.isRequired,
-        ssn: PropTypes.string.isRequired,
+    copySsn: func.isRequired,
+    date: instanceOf(Date).isRequired,
+    generateSsns: func.isRequired,
+    result: arrayOf(shape({
+        copied: bool.isRequired,
+        ssn: string.isRequired,
     })).isRequired,
-    updateInputValue: PropTypes.func.isRequired,
 };
 
 export default SsnGenerator;

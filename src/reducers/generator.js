@@ -7,12 +7,10 @@ import {
     K2_FACTORS,
     GENDERS,
     getChecksumDigit,
+    range,
 } from '../utils';
 
 import * as actions from '../actions';
-
-const range = (a, b) =>
-    Array.from(Array(b - a), (_, i) => i + a);
 
 const defaultState = {
     copiedSsns: [],
