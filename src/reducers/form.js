@@ -2,7 +2,7 @@ import * as actions from '../actions';
 
 const defaultState = {
     'validate-ssn': '09058049805',
-    'generate-ssn': new Date(),
+    'generate-ssn': '',
 };
 
 export default (state = defaultState, action) => {
