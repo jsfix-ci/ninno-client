@@ -1,7 +1,6 @@
 const getConfig = require('hjs-webpack')
 const DashboardPlugin = require('webpack-dashboard/plugin');
 
-
 const config = getConfig({
   // entry point for the app
   in: 'src/app.js',
@@ -37,6 +36,8 @@ const config = getConfig({
 
 });
 
-config.plugins.push(new DashboardPlugin());
+if (process.env.NODE_ENV !== "production") {
+  config.plugins.push(new DashboardPlugin());
+}
 
 module.exports = config;
