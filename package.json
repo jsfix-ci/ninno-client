@@ -1,18 +1,17 @@
 {
   "name": "ninno-client",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "",
   "files": [
     "public/"
   ],
   "scripts": {
-    "build": "webpack && npm run copy:images",
+    "build": "NODE_ENV=production webpack -p && npm run copy:images",
     "copy:images": "cp -R static/images public/",
     "lint": "eslint src/ test/",
     "lint:fix": "eslint --fix src/ test/",
     "precommit": "npm run lint && npm run test",
     "start": "webpack-dashboard -- hjs-dev-server",
-    "start2": "hjs-dev-server",
     "test": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --compilers js:babel-core/register --require test/setup.js --recursive test",
     "test:watch": "cross-env NODE_ENV=test node_modules/.bin/nyc node_modules/.bin/mocha -G --watch --compilers js:babel-core/register --require test/setup.js --recursive test",
     "prepublish": "npm run build",
