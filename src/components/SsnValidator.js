@@ -40,7 +40,7 @@ class SsnValidator extends Component {
         return (
             <Grid>
                 <GridRow>
-                    <GridCol sm={12} center>
+                    <GridCol sm={12} center={true}>
                         <h1>Validering av fødselsnummer</h1>
                     </GridCol>
                 </GridRow>
@@ -48,9 +48,9 @@ class SsnValidator extends Component {
                     <GridCol sm={{ cols: 8, offset: 4 }}>
                         <form>
                             <input
-                              name="validate-ssn"
-                              onChange={this.onInputChange}
-                              value={ssnValue}
+                                name="validate-ssn"
+                                onChange={this.onInputChange}
+                                value={ssnValue}
                             />
                         </form>
                     </GridCol>

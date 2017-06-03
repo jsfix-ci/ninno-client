@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import { func, shape, instanceOf } from 'prop-types';
 import { connect } from 'react-redux';
 
 import SsnGenerator from '../components/SsnGenerator';
@@ -7,31 +8,29 @@ import { copySsn, generateSsns, updateInputValue } from '../dispatchers';
 
 function GeneratorPage(props) {
     const {
-        formState,
+        date,
         generator,
     } = props;
 
     return (
         <SsnGenerator
-          copySsn={props.copySsn}
-          formState={formState}
-          generateSsns={props.generateSsns}
-          result={generator.ssns}
-          updateInputValue={props.updateInputValue}
+            copySsn={props.copySsn}
+            date={date}
+            generateSsns={props.generateSsns}
+            result={generator.ssns}
         />
     );
 }
 
 GeneratorPage.propTypes = {
-    copySsn: PropTypes.func.isRequired,
-    formState: PropTypes.shape({}).isRequired,
-    generateSsns: PropTypes.func.isRequired,
-    updateInputValue: PropTypes.func.isRequired,
-    generator: PropTypes.shape({}).isRequired,
+    copySsn: func.isRequired,
+    date: instanceOf(Date).isRequired,
+    generateSsns: func.isRequired,
+    generator: shape({}).isRequired,
 };
 
 const mapStateToProps = state => ({
-    formState: state.form,
+    date: new Date(state.datePicker.year, state.datePicker.month, state.datePicker.day),
     generator: state.generator,
 });
 

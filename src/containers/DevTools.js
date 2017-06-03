@@ -5,9 +5,9 @@ import DockMonitor from 'redux-devtools-dock-monitor';
 
 export default createDevTools(
     <DockMonitor
-      defaultIsVisible={false}
-      toggleVisibilityKey="ctrl-h"
-      changePositionKey="ctrl-w"
+        defaultIsVisible={false}
+        toggleVisibilityKey="ctrl-h"
+        changePositionKey="ctrl-w"
     >
         <LogMonitor />
     </DockMonitor>,

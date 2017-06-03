@@ -13,10 +13,10 @@ function ValidatorPage(props) {
 
     return (
         <SsnValidator
-          formState={formState}
-          result={validator.result}
-          updateInputValue={props.updateInputValue}
-          validateSsn={props.validateSsn}
+            formState={formState}
+            result={validator.result}
+            updateInputValue={props.updateInputValue}
+            validateSsn={props.validateSsn}
         />
     );
 }

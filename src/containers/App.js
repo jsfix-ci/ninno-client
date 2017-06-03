@@ -29,21 +29,21 @@ class App extends Component {
             <div className="ninno-container">
                 <Grid>
                     <GridRow>
-                        <GridCol sm={12} center>
+                        <GridCol sm={12} center={true}>
                             <nav>
                                 <ul className="ninno-nav">
                                     <li className="ninno-nav__item">
                                         <button
-                                          className="ninno-nav__button"
-                                          onClick={this.openValidator}
+                                            className="ninno-nav__button"
+                                            onClick={this.openValidator}
                                         >
                                             Validering av fødselsnummer
                                         </button>
                                     </li>
                                     <li className="ninno-nav__item">
                                         <button
-                                          className="ninno-nav__button"
-                                          onClick={this.openGenerator}
+                                            className="ninno-nav__button"
+                                            onClick={this.openGenerator}
                                         >
                                             Generering av fødselsnummer
                                         </button>
