@@ -35,36 +35,38 @@ class SsnGenerator extends Component {
             <Grid>
                 <GridRow>
                     <GridCol sm={12} center={true}>
-                        <h1>Generering av fødselsnummer</h1>
+                        <h2>Generering av fødselsnummer</h2>
                     </GridCol>
                 </GridRow>
                 <GridRow>
-                    <GridCol sm={{ cols: 8, offset: 4 }}>
+                    <GridCol sm={12} center={true}>
                         <DatePicker />
                     </GridCol>
                 </GridRow>
                 <GridRow>
                     <GridCol sm={6} center={true}>
-                        <h2>Menn</h2>
+                        <div className="ninno-fnr ninno-fnr--first-block">
+                            <h2 className="ninno-fnr__header">
+                                Menn
+                            </h2>
+                            <ul className="ninno-fnr__list">
+                                {maleSsns.map(ssn =>
+                                    <SsnItem key={ssn.ssn} ssn={ssn} copySsn={copySsn} />,
+                                )}
+                            </ul>
+                        </div>
                     </GridCol>
                     <GridCol sm={6} center={true}>
-                        <h2>Kvinner</h2>
-                    </GridCol>
-                </GridRow>
-                <GridRow>
-                    <GridCol sm={6}>
-                        <ul className="ninno-fnr-list">
-                            {maleSsns.map(ssn =>
-                                <SsnItem key={ssn.ssn} ssn={ssn} copySsn={copySsn} />,
-                            )}
-                        </ul>
-                    </GridCol>
-                    <GridCol sm={6}>
-                        <ul className="ninno-fnr-list">
-                            {femaleSsns.map(ssn =>
-                                <SsnItem key={ssn.ssn} ssn={ssn} copySsn={copySsn} />,
-                            )}
-                        </ul>
+                        <div className="ninno-fnr">
+                            <h2 className="ninno-fnr__header">
+                                Kvinner
+                            </h2>
+                            <ul className="ninno-fnr__list">
+                                {femaleSsns.map(ssn =>
+                                    <SsnItem key={ssn.ssn} ssn={ssn} copySsn={copySsn} />,
+                                )}
+                            </ul>
+                        </div>
                     </GridCol>
                 </GridRow>
             </Grid>

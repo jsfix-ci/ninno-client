@@ -28,19 +28,20 @@ export default class SsnItem extends Component {
             <li
                 className={
                     classNames(
-                        'ninno-fnr-list__item',
-                        { 'ninno-fnr-list__item--copied': ssn.copied },
+                        'ninno-fnr__list-item',
+                        { 'ninno-fnr__list-item--copied': ssn.copied },
                     )
                 }
             >
                 {ssn.ssn}
                 <CopyToClipboard text={ssn.ssn}>
                     <button
-                        className="ninno-fnr-list__copy-button"
+                        className="ninno-fnr__copy-button"
+                        aria-label="kopier"
                         type="button"
                         onClick={this.onClick}
                     >
-                        kopier
+                        &nbsp;
                     </button>
                 </CopyToClipboard>
             </li>

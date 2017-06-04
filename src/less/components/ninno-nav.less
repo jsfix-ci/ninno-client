@@ -16,8 +16,16 @@
         background-color: @summer-green;
         border: 2px solid @eggplant;
         border-radius: 5px;
+        box-shadow: 2px 2px 5px;
         color: @eggplant;
         cursor: pointer;
         padding: 20px;
+
+        &:focus {
+            outline-color: @eggplant;
+            outline-offset: -2px;
+            outline-style: solid;
+            outline-width: 5px;
+        }
     }
 }

@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
 import { Grid, GridRow, GridCol } from '~/components/grid';
+import Header from '~/components/Header';
 
-import { generatorPath, validatorPath } from '../routes';
+import { generatorPath, validatorPath } from '~/routes';
 
 class App extends Component {
 
@@ -30,26 +31,10 @@ class App extends Component {
                 <Grid>
                     <GridRow>
                         <GridCol sm={12} center={true}>
-                            <nav>
-                                <ul className="ninno-nav">
-                                    <li className="ninno-nav__item">
-                                        <button
-                                            className="ninno-nav__button"
-                                            onClick={this.openValidator}
-                                        >
-                                            Validering av fødselsnummer
-                                        </button>
-                                    </li>
-                                    <li className="ninno-nav__item">
-                                        <button
-                                            className="ninno-nav__button"
-                                            onClick={this.openGenerator}
-                                        >
-                                            Generering av fødselsnummer
-                                        </button>
-                                    </li>
-                                </ul>
-                            </nav>
+                            <Header
+                                openGenerator={this.openGenerator}
+                                openValidator={this.openValidator}
+                            />
                         </GridCol>
                     </GridRow>
                 </Grid>

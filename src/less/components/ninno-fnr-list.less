@@ -1,15 +1,6 @@
-.ninno-fnr-list {
-    columns: 150px 2;
-
-    &__item {
-        display: inline-block;
-        list-style-type: none;
-        margin-bottom: 5px;
-
-        &--copied {
-            color: @gunsmoke;
-        }
-    }
+.ninno-fnr {
+    margin-top: 40px;
+    padding: 0 10px 0;
 
     &__copy-button {
         border: none;
@@ -18,6 +9,38 @@
         background-repeat: no-repeat;
         background-size: 20px;
         background-position-x: 50%;
-        color: transparent;
+        margin-left: 10px;
+        height: 20px;
+        width: 25px;
+
+
+        &:focus {
+            outline-color: @eggplant;
+            outline-style: solid;
+            outline-width: 5px;
+        }
+    }
+
+    &__header {
+        border-bottom: 2px solid @eggplant;
+        margin: 30px auto;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    &__list {
+        columns: 150px 3;
+        padding: 0;
+        text-align: center;
+    }
+
+    &__list-item {
+        display: inline-block;
+        list-style-type: none;
+        margin: 5px 0;
+
+        &--copied {
+            color: @gunsmoke;
+        }
     }
 }

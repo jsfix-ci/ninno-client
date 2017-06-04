@@ -41,7 +41,7 @@ class SsnValidator extends Component {
             <Grid>
                 <GridRow>
                     <GridCol sm={12} center={true}>
-                        <h1>Validering av fødselsnummer</h1>
+                        <h2>Validering av fødselsnummer</h2>
                     </GridCol>
                 </GridRow>
                 <GridRow>

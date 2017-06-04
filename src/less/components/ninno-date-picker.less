@@ -23,6 +23,12 @@
         background: none;
         cursor: pointer;
         color: @eggplant;
+
+        &:focus {
+            outline-color: @eggplant;
+            outline-style: solid;
+            outline-width: 5px;
+        }
     }
 
     &__day-list {
@@ -50,9 +56,9 @@
         margin: 5px;
 
         &:focus {
+            outline-color: @eggplant;
             outline-style: solid;
-            outline-width: 2px;
-            outline-offset: 1px;
+            outline-width: 5px;
         }
 
         &--previous {
@@ -78,6 +84,12 @@
         height: 1.5em;
         padding: 1px 20px 1px 5px;
         text-align: center;
+
+        &:focus {
+            outline-color: @eggplant;
+            outline-style: solid;
+            outline-width: 5px;
+        }
 
         &::-ms-expand {
             display: none;
