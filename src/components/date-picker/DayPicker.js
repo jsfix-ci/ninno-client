@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { func, number } from 'prop-types';
+import classNames from 'classnames';
 
 import getDaysInMonth from 'date-fns/get_days_in_month';
 import getDayOfWeek from 'date-fns/get_day';
@@ -21,8 +22,23 @@ class DayPicker extends Component {
             year,
         } = this.props;
 
-        const firstDayOfWeek = (getDayOfWeek(new Date(year, month, 1)) + 7) % 8;
         const numberOfDays = getDaysInMonth(new Date(year, month));
+
+        let previousNumberOfDays;
+        if (month === 0) {
+            previousNumberOfDays = getDaysInMonth(new Date(year - 1, 11));
+        } else {
+            previousNumberOfDays = getDaysInMonth(new Date(year, month - 1));
+        }
+
+        let firstDayOfMonth = getDayOfWeek(new Date(year, month, 1, 12));
+        if (firstDayOfMonth === 0) {
+            firstDayOfMonth = 7; // americans..
+        }
+        let lastDayOfMonth = getDayOfWeek(new Date(year, month, numberOfDays, 12));
+        if (lastDayOfMonth === 0) {
+            lastDayOfMonth = 7; // why did it have to be americans?
+        }
 
         return ['man', 'tir', 'ons', 'tor', 'fre', 'lør', 'søn']
             .map(day =>
@@ -34,15 +50,20 @@ class DayPicker extends Component {
                 </li>,
             )
             .concat(
-                firstDayOfWeek === 0 ? [] :
-                    range(1, firstDayOfWeek).map(day =>
+                firstDayOfMonth === 0 ? [] :
+                    range(0, firstDayOfMonth - 1).map(day =>
                         <li
-                            className="ninno-date-picker__day-list-item"
-                            key={`filler-${day}`}
+                            className={
+                                classNames(
+                                    'ninno-date-picker__day-list-item',
+                                    'ninno-date-picker__day-list-item--filler',
+                                )
+                            }
+                            key={`filler-${previousNumberOfDays - day}`}
                         >
-                            &nbsp;
+                            {previousNumberOfDays - day}
                         </li>,
-                    ),
+                    ).reverse(),
             )
             .concat(
                 range(1, numberOfDays + 1).map(day =>
@@ -58,6 +79,22 @@ class DayPicker extends Component {
                         </button>
                     </li>,
                 ),
+            )
+            .concat(
+                lastDayOfMonth === 7 ? [] :
+                    range(lastDayOfMonth, 7).map((_, index) =>
+                        <li
+                            className={
+                                classNames(
+                                    'ninno-date-picker__day-list-item',
+                                    'ninno-date-picker__day-list-item--filler',
+                                )
+                            }
+                            key={`filler-${index + 1}`}
+                        >
+                            {index + 1}
+                        </li>,
+                    ),
             );
     }
 

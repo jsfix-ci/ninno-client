@@ -12,13 +12,39 @@ const defaultState = {
     year: getYear(now),
 };
 
-const decreaseMonth = state => ({ ...state, month: state.month - 1 });
 const decreaseYear = state => ({ ...state, year: state.year - 1 });
-const increaseMonth = state => ({ ...state, month: state.month + 1 });
 const increaseYear = state => ({ ...state, year: state.year + 1 });
 const setDay = (state, { day }) => ({ ...state, day });
 const setMonth = (state, { month }) => ({ ...state, month });
 const setYear = (state, { year }) => ({ ...state, year });
+
+const decreaseMonth = (state) => {
+    let nextMonth = state.month - 1;
+    let nextYear = state.year;
+    if (nextMonth === -1) {
+        nextMonth = 11;
+        nextYear -= 1;
+    }
+    return {
+        ...state,
+        month: nextMonth,
+        year: nextYear,
+    };
+};
+
+const increaseMonth = (state) => {
+    let nextMonth = state.month + 1;
+    let nextYear = state.year;
+    if (nextMonth === 12) {
+        nextMonth = 0;
+        nextYear += 1;
+    }
+    return {
+        ...state,
+        month: nextMonth,
+        year: nextYear,
+    };
+};
 
 export default (state = defaultState, action) => {
     switch (action.type) {
