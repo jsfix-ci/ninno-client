@@ -40,6 +40,7 @@ function DatePicker(props) {
                 month={month}
             />
             <DayPicker
+                day={day}
                 month={month}
                 setDay={setDay}
                 year={year}

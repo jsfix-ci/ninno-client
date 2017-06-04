@@ -19,10 +19,14 @@
     }
 
     &__day-button {
-        border: none;
+        border: 2px solid transparent;
         background: none;
         cursor: pointer;
         color: @eggplant;
+
+        &&--chosen {
+            border: 2px solid @eggplant;
+        }
 
         &:focus {
             outline-color: @eggplant;

@@ -17,6 +17,7 @@ class DayPicker extends Component {
 
     renderDays() {
         const {
+            day: chosenDay,
             month,
             setDay,
             year,
@@ -72,7 +73,12 @@ class DayPicker extends Component {
                         key={`day-${day}`}
                     >
                         <button
-                            className="ninno-date-picker__day-button"
+                            className={
+                                classNames(
+                                    'ninno-date-picker__day-button',
+                                    { 'ninno-date-picker__day-button--chosen': day === chosenDay },
+                                )
+                            }
                             onClick={() => setDay(day)}
                         >
                             {day}
@@ -110,6 +116,7 @@ class DayPicker extends Component {
 }
 
 DayPicker.propTypes = {
+    day: number.isRequired,
     month: number.isRequired,
     setDay: func.isRequired,
     year: number.isRequired,
