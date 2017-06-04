@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import * as dispatchers from '~/dispatchers';
 
 import DayPicker from './DayPicker';
-import InputField from './InputField';
+import DateDisplay from './DateDisplay';
 import MonthPicker from './MonthPicker';
 import YearPicker from './YearPicker';
 
@@ -44,7 +44,7 @@ function DatePicker(props) {
                 setDay={setDay}
                 year={year}
             />
-            <InputField date={date} />
+            <DateDisplay date={date} />
         </div>
     );
 }

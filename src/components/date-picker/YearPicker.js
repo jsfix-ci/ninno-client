@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { func, number } from 'prop-types';
 
+import { range } from '~/utils';
+
 class YearPicker extends Component {
 
     constructor() {
@@ -10,11 +12,7 @@ class YearPicker extends Component {
     }
 
     onYearChange(event) {
-        const year = Number(event.target.value);
-
-        if (!Number.isNaN(year)) {
-            this.props.setYear(year);
-        }
+        this.props.setYear(Number(event.target.value));
     }
 
     render() {
@@ -34,13 +32,16 @@ class YearPicker extends Component {
                 >
                     &nbsp;
                 </button>
-                <input
+                <select
                     className="ninno-date-picker__year-input"
-                    maxLength="4"
                     name="year"
                     onChange={this.onYearChange}
                     value={year}
-                />
+                >
+                    {range(1854, 2040).map(_year =>
+                        <option value={_year} key={_year}>{_year}</option>,
+                    )}
+                </select>
                 <button
                     aria-label="neste år"
                     className="ninno-date-picker__skip-button ninno-date-picker__skip-button--next"
