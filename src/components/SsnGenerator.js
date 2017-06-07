@@ -4,7 +4,7 @@ import { arrayOf, bool, func, instanceOf, shape, string } from 'prop-types';
 import isEqual from 'date-fns/is_equal';
 import isValid from 'date-fns/is_valid';
 
-import { DatePicker } from '~/components/date-picker';
+import { AgePicker, DatePicker } from '~/components/date-picker';
 import { Grid, GridRow, GridCol } from '~/components/grid';
 
 import { GENDERS } from '../utils';
@@ -39,8 +39,17 @@ class SsnGenerator extends Component {
                     </GridCol>
                 </GridRow>
                 <GridRow>
-                    <GridCol sm={12} center={true}>
-                        <DatePicker />
+                    <GridCol sm={6} center={true}>
+                        <div>
+                            <h3>Velg dato</h3>
+                            <DatePicker />
+                        </div>
+                    </GridCol>
+                    <GridCol sm={6} center={true}>
+                        <div>
+                            <h3>Velg alder</h3>
+                            <AgePicker />
+                        </div>
                     </GridCol>
                 </GridRow>
                 <GridRow>

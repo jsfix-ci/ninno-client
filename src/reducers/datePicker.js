@@ -1,6 +1,8 @@
 import getDay from 'date-fns/get_date';
 import getMonth from 'date-fns/get_month';
 import getYear from 'date-fns/get_year';
+import subYears from 'date-fns/sub_years'
+import isBefore from 'date-fns/is_before'
 
 import * as actions from '../actions';
 
@@ -46,6 +48,23 @@ const increaseMonth = (state) => {
     };
 };
 
+const setAge = (state, { age }) => {
+    const { month, day } = state;
+    const now = new Date();
+
+    const candidate = new Date(getYear(now) - age, month, day);
+    if (isBefore(subYears(now, age), candidate)) {
+        return {
+            ...state,
+            year: getYear(now) - age,
+        }
+    }
+    return {
+        ...state,
+        year: getYear(now) - (age + 1),
+    };
+}
+
 export default (state = defaultState, action) => {
     switch (action.type) {
         case actions.DECREASE_MONTH:
@@ -56,6 +75,8 @@ export default (state = defaultState, action) => {
             return increaseMonth(state);
         case actions.INCREASE_YEAR:
             return increaseYear(state);
+        case actions.SET_AGE:
+            return setAge(state, action);
         case actions.SET_DAY:
             return setDay(state, action);
         case actions.SET_MONTH:

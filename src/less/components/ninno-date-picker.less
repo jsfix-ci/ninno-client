@@ -78,6 +78,29 @@
         }
     }
 
+    &__age-input,
+    &__age-slider {
+        background-color: @foggy-grey;
+        border: 1px solid @eggplant;
+        box-shadow: 1px 1px 1px;
+        color: @eggplant;
+        display: block;
+        height: 1.5em;
+        padding: 1px 5px;
+        margin: 10px 0;
+        text-align: center;
+
+        &:focus {
+            outline-color: @eggplant;
+            outline-style: solid;
+            outline-width: 5px;
+        }
+    }
+
+    &__age-input {
+        max-width: 50px;
+    }
+
     &__month-input,
     &__year-input {
         appearance: none;
