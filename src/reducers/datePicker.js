@@ -9,7 +9,7 @@ const now = new Date();
 const defaultState = {
     day: getDay(now),
     month: getMonth(now),
-    year: getYear(now),
+    year: getYear(now) - 20,
 };
 
 const decreaseYear = state => ({ ...state, year: state.year - 1 });
