@@ -39,7 +39,7 @@ const config = getConfig({
 
 });
 
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== 'production') {
   config.plugins.push(new DashboardPlugin());
 }
 
@@ -49,30 +49,33 @@ config.plugins.push(
   ])
 );
 
-config.plugins.push(
-  new OfflinePlugin({
-    publicPath: '/',
-    caches: {
-      main: [
-        'ninno-client.*.css',
-        'ninno-client.*.js',
+if (process.env.NODE_ENV === 'production') {
+  config.plugins.push(
+    new OfflinePlugin({
+      publicPath: '/',
+      safeToUseOptionalCaches: true,
+      caches: {
+        main: [
+          'ninno-client.*.css',
+          'ninno-client.*.js',
+        ],
+        additional: [
+          ':externals:',
+        ],
+        optional: [
+          ':rest:'
+        ],
+      },
+      externals: [
+        '/',
+        'validering',
+        'generering',
       ],
-      additional: [
-        ':externals:',
-      ],
-      optional: [
-        ':rest:'
-      ],
-    },
-    externals: [
-      '/',
-      'validering',
-      'generering',
-    ],
-    ServiceWorker: {
-      navigateFallbackURL: '/',
-    },
-  })
-);
+      ServiceWorker: {
+        navigateFallbackURL: '/',
+      },
+    })
+  );
+}
 
 module.exports = config;
