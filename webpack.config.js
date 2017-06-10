@@ -52,6 +52,7 @@ config.plugins.push(
 if (process.env.NODE_ENV === 'production') {
   config.plugins.push(
     new OfflinePlugin({
+      autoUpdate: true,
       publicPath: '/',
       safeToUseOptionalCaches: true,
       caches: {
