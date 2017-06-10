@@ -1,6 +1,6 @@
 {
   "name": "ninno-client",
-  "version": "1.1.5",
+  "version": "1.2.0",
   "description": "",
   "files": [
     "public/"
@@ -63,6 +63,7 @@
     "babel-polyfill": "^6.23.0",
     "classnames": "^2.2.5",
     "date-fns": "^1.28.4",
+    "offline-plugin": "^4.8.1",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-copy-to-clipboard": "^5.0.0",

@@ -1,5 +1,7 @@
 const getConfig = require('hjs-webpack')
+
 const DashboardPlugin = require('webpack-dashboard/plugin');
+const OfflinePlugin = require('offline-plugin');
 
 const config = getConfig({
   // entry point for the app
@@ -39,5 +41,23 @@ const config = getConfig({
 if (process.env.NODE_ENV !== "production") {
   config.plugins.push(new DashboardPlugin());
 }
+
+config.plugins.push(
+  new OfflinePlugin({
+    publicPath: '/',
+    caches: {
+      main: [
+        'ninno-client.*.css',
+        'ninno-client.*.js',
+      ],
+    },
+    externals: [
+      '/'
+    ],
+    ServiceWorker: {
+      navigateFallbackURL: '/'
+    },
+  })
+);
 
 module.exports = config;
