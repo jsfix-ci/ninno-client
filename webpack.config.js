@@ -1,5 +1,6 @@
 const getConfig = require('hjs-webpack')
 
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const DashboardPlugin = require('webpack-dashboard/plugin');
 const OfflinePlugin = require('offline-plugin');
 
@@ -43,6 +44,12 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 config.plugins.push(
+  new CopyWebpackPlugin([
+    { from: 'static/images', to: 'images'}
+  ])
+);
+
+config.plugins.push(
   new OfflinePlugin({
     publicPath: '/',
     caches: {
@@ -50,12 +57,20 @@ config.plugins.push(
         'ninno-client.*.css',
         'ninno-client.*.js',
       ],
+      additional: [
+        ':externals:',
+      ],
+      optional: [
+        ':rest:'
+      ],
     },
     externals: [
-      '/'
+      '/',
+      'validering',
+      'generering',
     ],
     ServiceWorker: {
-      navigateFallbackURL: '/'
+      navigateFallbackURL: '/',
     },
   })
 );

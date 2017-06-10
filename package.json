@@ -1,13 +1,12 @@
 {
   "name": "ninno-client",
-  "version": "1.2.0",
+  "version": "1.2.3",
   "description": "",
   "files": [
     "public/"
   ],
   "scripts": {
-    "build": "NODE_ENV=production webpack -p && npm run copy:images",
-    "copy:images": "cp -R static/images public/",
+    "build": "NODE_ENV=production webpack -p",
     "lint": "eslint src/ test/",
     "lint:fix": "eslint --fix src/ test/",
     "precommit": "npm run lint && npm run test",
@@ -37,6 +36,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-root-import": "^4.1.8",
+    "copy-webpack-plugin": "^4.0.1",
     "coveralls": "^2.13.1",
     "cross-env": "^4.0.0",
     "css-loader": "^0.28.3",
