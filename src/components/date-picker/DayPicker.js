@@ -7,6 +7,20 @@ import getDayOfWeek from 'date-fns/get_day';
 
 import { range } from '~/utils';
 
+const makeFiller = label => (
+    <li
+        className="ninno-date-picker__day-list-item"
+        key={`filler-${label}`}
+    >
+        <button
+            className="ninno-date-picker__day-button"
+            disabled={true}
+        >
+            {label}
+        </button>
+    </li>
+);
+
 class DayPicker extends Component {
 
     constructor() {
@@ -52,18 +66,8 @@ class DayPicker extends Component {
             )
             .concat(
                 firstDayOfMonth === 0 ? [] :
-                    range(0, firstDayOfMonth - 1).map(day =>
-                        <li
-                            className="ninno-date-picker__day-list-item"
-                            key={`filler-${previousNumberOfDays - day}`}
-                        >
-                            <button
-                                className="ninno-date-picker__day-button"
-                                disabled={true}
-                            >
-                                {previousNumberOfDays - day}
-                            </button>
-                        </li>,
+                    range(0, firstDayOfMonth - 1).map(
+                        day => makeFiller(previousNumberOfDays - day),
                     ).reverse(),
             )
             .concat(
@@ -87,35 +91,15 @@ class DayPicker extends Component {
                 ),
             )
             .concat(
-                range(lastDayOfMonth, 7).map((_, index) =>
-                    <li
-                        className="ninno-date-picker__day-list-item"
-                        key={`filler-${index + 1}`}
-                    >
-                        <button
-                            className="ninno-date-picker__day-button"
-                            disabled={true}
-                        >
-                            {index + 1}
-                        </button>
-                    </li>,
+                range(lastDayOfMonth, 7).map(
+                    (_, index) => makeFiller(index + 1),
                 ),
             );
         if (list.length === 42) {
             const lastShown = range(lastDayOfMonth, 7).length;
             return list.concat(
-                    range(lastShown, lastShown + 7).map(day =>
-                        <li
-                            className="ninno-date-picker__day-list-item"
-                            key={`filler-${day + 1}`}
-                        >
-                            <button
-                                className="ninno-date-picker__day-button"
-                                disabled={true}
-                            >
-                                {day + 1}
-                            </button>
-                        </li>,
+                    range(lastShown, lastShown + 7).map(
+                        day => makeFiller(day + 1),
                     ),
                 );
         }
