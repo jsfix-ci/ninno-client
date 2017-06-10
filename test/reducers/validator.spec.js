@@ -52,7 +52,7 @@ describe('validator reducer', () => {
         it('finds date of birth for 1900-1999', () => {
             const state = getState('09058049805');
             expect(state.day).to.be(9);
-            expect(state.month).to.be(5);
+            expect(state.month).to.be(4);
             expect(state.year).to.be(1980);
         });
 
@@ -60,7 +60,7 @@ describe('validator reducer', () => {
             const state = getState('22013786651');
 
             expect(state.day).to.be(22);
-            expect(state.month).to.be(1);
+            expect(state.month).to.be(0);
             expect(state.year).to.be(2037);
         });
 
@@ -68,7 +68,7 @@ describe('validator reducer', () => {
             const state = getState('31126974321');
 
             expect(state.day).to.be(31);
-            expect(state.month).to.be(12);
+            expect(state.month).to.be(11);
             expect(state.year).to.be(1869);
         });
 
@@ -76,7 +76,7 @@ describe('validator reducer', () => {
             const state = getState('01122950006');
 
             expect(state.day).to.be(1);
-            expect(state.month).to.be(12);
+            expect(state.month).to.be(11);
             expect(state.year).to.be(2029);
         });
 
@@ -84,7 +84,7 @@ describe('validator reducer', () => {
             const state = getState('01125572800');
 
             expect(state.day).to.be(1);
-            expect(state.month).to.be(12);
+            expect(state.month).to.be(11);
             expect(state.year).to.be(1855);
         });
     });

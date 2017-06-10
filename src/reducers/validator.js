@@ -30,7 +30,7 @@ const validate = (ssn) => {
     }
 
     const day = Number(ssn.substring(0, 2));
-    const month = Number(ssn.substring(2, 4));
+    const month = Number(ssn.substring(2, 4)) - 1;
     // TODO: this screams for a good refactoring
     const alternateYears = alternativeCenturies.map(a => Number(String(a) + year));
 

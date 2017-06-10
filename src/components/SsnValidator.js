@@ -10,14 +10,14 @@ class SsnValidator extends Component {
         super();
 
         this.onInputChange = this.onInputChange.bind(this);
+
+        this.state = {
+            ssn: '',
+        };
     }
 
     componentDidMount() {
-        const {
-            formState: {
-                'validate-ssn': ssnValue,
-            },
-        } = this.props;
+        let ssnValue;
 
         if (ssnValue) {
             this.props.validateSsn(ssnValue);
@@ -25,17 +25,20 @@ class SsnValidator extends Component {
     }
 
     onInputChange(e) {
-        this.props.updateInputValue(e.target.name, e.target.value);
+        this.setState({
+            ssn: e.target.value,
+        });
         this.props.validateSsn(e.target.value);
     }
 
     render() {
         const {
-            formState: {
-                'validate-ssn': ssnValue,
-            },
             result,
         } = this.props;
+
+        const {
+            ssn,
+        } = this.state;
 
         return (
             <Grid>
@@ -45,18 +48,19 @@ class SsnValidator extends Component {
                     </GridCol>
                 </GridRow>
                 <GridRow>
-                    <GridCol sm={{ cols: 8, offset: 4 }}>
+                    <GridCol sm={12} center={true}>
                         <form>
                             <input
-                                name="validate-ssn"
+                                className="ninno-validator__input"
+                                name="ssn"
                                 onChange={this.onInputChange}
-                                value={ssnValue}
+                                value={ssn}
                             />
                         </form>
                     </GridCol>
                 </GridRow>
                 <GridRow>
-                    <GridCol sm={{ cols: 8, offset: 4 }}>
+                    <GridCol sm={12} center={true}>
                         {!result.invalid &&
                             <div>
                                 <h2>Født</h2>
@@ -69,6 +73,9 @@ class SsnValidator extends Component {
                                 </p>
                             </div>
                         }
+                        {result.invalid &&
+                            <p>Dette er ikke et gyldig fødselsnummer</p>
+                        }
                     </GridCol>
                 </GridRow>
             </Grid>
@@ -77,10 +84,6 @@ class SsnValidator extends Component {
 }
 
 SsnValidator.propTypes = {
-    updateInputValue: PropTypes.func.isRequired,
-    formState: PropTypes.shape({
-        'validate-ssn': PropTypes.string.isRequired,
-    }).isRequired,
     result: PropTypes.shape({
         day: PropTypes.number,
         month: PropTypes.number,
