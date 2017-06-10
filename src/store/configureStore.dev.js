@@ -5,10 +5,10 @@ import { createLogger } from 'redux-logger';
 import rootReducer from '../reducers';
 import DevTools from '../containers/DevTools';
 
-const configureStore = (preloadedState) => {
+const configureStore = () => {
     const store = createStore(
         rootReducer,
-        preloadedState,
+        undefined,
         compose(
             applyMiddleware(
                 thunk,
