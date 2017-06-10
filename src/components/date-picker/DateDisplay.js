@@ -18,7 +18,7 @@ function DateDisplay(props) {
             </div>
             <div className="ninno-date-picker__component">
                 <span className="ninno-date-picker__date-display">
-                    Valgt alder: <strong>{age}</strong>
+                    Valgt alder: <strong>{age} år</strong>
                 </span>
             </div>
         </div>

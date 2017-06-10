@@ -28,6 +28,10 @@
             border: 2px solid @eggplant;
         }
 
+        &:disabled {
+            color: @gunsmoke;
+        }
+
         &:focus {
             outline-color: @eggplant;
             outline-style: solid;
@@ -47,10 +51,6 @@
         flex-basis: calc(100%/7);
         padding: 2px;
         text-align: center;
-
-        &--filler {
-            color: @gunsmoke;
-        }
     }
 
     &__skip-button {
