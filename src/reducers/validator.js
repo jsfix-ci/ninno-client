@@ -11,7 +11,7 @@ const validate = (ssn) => {
     const centuryIndicator = Number(ssn.substring(6, 9));
 
     let century;
-    const year = Number(ssn.substring(4, 6));
+    const year = ssn.substring(4, 6);
     const alternativeCenturies = [];
     if (centuryIndicator < 500) {
         century = 19;
@@ -23,7 +23,7 @@ const validate = (ssn) => {
         if (centuryIndicator >= 900 && centuryIndicator) {
             century = 19;
             alternativeCenturies.push(20);
-        } else if (centuryIndicator < 750 && year > 39) {
+        } else if (centuryIndicator < 750 && Number(year) > 39) {
             century = 18;
             alternativeCenturies.push(20);
         }

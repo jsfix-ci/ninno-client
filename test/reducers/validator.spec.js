@@ -87,6 +87,14 @@ describe('validator reducer', () => {
             expect(state.month).to.be(11);
             expect(state.year).to.be(1855);
         });
+
+        it('works for ssn person born in 1908', () => {
+            const state = getState('17060825378');
+
+            expect(state.day).to.be(17);
+            expect(state.month).to.be(5);
+            expect(state.year).to.be(1908);
+        });
     });
 
     describe('gender', () => {
