@@ -61,6 +61,7 @@
   },
   "dependencies": {
     "babel-polyfill": "^6.23.0",
+    "browsernizr": "^2.2.0",
     "classnames": "^2.2.5",
     "date-fns": "^1.28.4",
     "offline-plugin": "^4.8.1",

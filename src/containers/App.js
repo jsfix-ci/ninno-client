@@ -30,6 +30,17 @@ class App extends Component {
             <div className="ninno-container">
                 <Grid>
                     <GridRow>
+                        <GridCol sm={{ cols: 6, offset: 3 }} center={true}>
+                            <div className="ninno-old-browser">
+                                <p>
+                                    Det ser ut som du bruker en eldre browser.
+                                    Denne websiden er skrevet for moderne browsere og vil
+                                    sannsynligvis ikke fungere optimalt
+                                </p>
+                            </div>
+                        </GridCol>
+                    </GridRow>
+                    <GridRow>
                         <GridCol sm={12} center={true}>
                             <Header
                                 openGenerator={this.openGenerator}

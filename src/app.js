@@ -6,6 +6,10 @@ import { browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import * as OfflinePluginRuntime from 'offline-plugin/runtime';
 
+import 'browsernizr/test/css/flexbox';
+import 'browsernizr/test/css/flexwrap';
+import 'browsernizr';
+
 import './less/styles.less';
 
 import Root from './containers/Root';
